@@ -43,3 +43,4 @@ Can you help to make it better?
 ## Notes
 1. It is possible that some of the stories do not have images.
 2. It is possible that the link to the full story might not work as it is controlled by New York Times.
+3. If myjson service is down, you could use another endpoint (http://www.mocky.io/v2/573c89f31100004a1daa8adb)
