@@ -72,7 +72,7 @@ public class MainActivity
         new Thread(new Runnable() {
             @Override public void run() {
                 try {
-                    URL url = new URL("https://api.myjson.com/bins/nl6jh");
+                    URL url = new URL("http://www.mocky.io/v2/573c89f31100004a1daa8adb");
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     String readStream = readStream(con.getInputStream());
                     callback.onResult(readStream);
@@ -124,8 +124,20 @@ public class MainActivity
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         NewsEntity newsEntity = newsItemList.get(position);
                         String title = newsEntity.getTitle();
+                        String storyURL = newsEntity.getArticleUrl();
+                        String summary = newsEntity.getSummary();
+                        String imageURL = "";
+                        if(newsEntity.getMediaEntity().size() > 0){
+                            imageURL = newsEntity.getMediaEntity().get(0).getUrl();
+                        }else{
+                            imageURL = "https://static01.nyt.com/images/2019/12/15/arts/15STAR-WARS/15STAR-WARS-thumbStandard.jpg";
+                        }
+
                         Intent intent = new Intent(MainActivity.this, DetailViewActivity.class);
                         intent.putExtra("title", title);
+                        intent.putExtra("storyURL",storyURL);
+                        intent.putExtra("summary",summary);
+                        intent.putExtra("imageURL",imageURL);
                         startActivity(intent);
                     }
                 });

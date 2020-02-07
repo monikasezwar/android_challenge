@@ -16,6 +16,9 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import java.util.List;
 
 public class NewsListAdapter extends ArrayAdapter {
+
+    private String defaultUrl = "https://static01.nyt.com/images/2019/12/15/arts/15STAR-WARS/15STAR-WARS-thumbStandard.jpg";
+
     private static class ViewHolder {
         TextView newsTitle;
         DraweeView imageView;
@@ -30,8 +33,12 @@ public class NewsListAdapter extends ArrayAdapter {
         NewsEntity newsEntity = (NewsEntity) getItem(position);
         List<MediaEntity> mediaEntityList = newsEntity.getMediaEntity();
         String thumbnailURL = "";
-        MediaEntity mediaEntity = mediaEntityList.get(0);
-        thumbnailURL = mediaEntity.getUrl();
+        if(mediaEntityList.size() > 0){
+            MediaEntity mediaEntity = mediaEntityList.get(0);
+            thumbnailURL = mediaEntity.getUrl();
+        }else {
+            thumbnailURL = defaultUrl;
+        }
 
         ViewHolder viewHolder;
         if (convertView == null) {
